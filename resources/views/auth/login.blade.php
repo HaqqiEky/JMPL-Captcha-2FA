@@ -32,10 +32,12 @@
             </label>
         </div>
 
-        <div class="flex items-center justify mt-4">
-            {!! NoCaptcha::renderJs() !!}
-            {!! NoCaptcha::display() !!}
-        </div>
+        @if (session()->get('login_attempts', 0) >= 3)
+            <div class="justify-content-center mt-2 mx-auto" style="width: max-content;">
+                {!! NoCaptcha::renderJs() !!}
+                {!! NoCaptcha::display() !!}
+            </div>
+        @endif
 
         <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
